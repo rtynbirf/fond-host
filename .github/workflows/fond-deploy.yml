@@ -62,10 +62,10 @@ jobs:
       - name: Приёмка выкладки локально (печать обязана сойтись)
         run: |
           cd _site
-          ВСЕГО=$(find minus -type f | wc -l)
-          ОК=$(sha256sum -c SHA256SUMS.txt | grep -c ': OK$' || true)
-          echo "печать: $ОК/$ВСЕГО"
-          [ "$ОК" = "$ВСЕГО" ] || { echo '##[error]печать разошлась'; exit 1; }
+          TOTAL=$(find minus -type f | wc -l)
+          OK_CNT=$(sha256sum -c SHA256SUMS.txt | grep -c ': OK$' || true)
+          echo "печать: $OK_CNT/$TOTAL"
+          [ "$OK_CNT" = "$TOTAL" ] || { echo '##[error]печать разошлась'; exit 1; }
 
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6 (пин из действующих зелёных прогонов дома)
       - name: Upload artifact
