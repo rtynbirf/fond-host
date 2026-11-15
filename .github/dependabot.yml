@@ -1,0 +1,12 @@
+# АВТОМАТ ЗАВИСИМОСТЕЙ (2026-11-16): экосистема github-actions, weekly, группировка.
+# Пины экшенов — полные SHA40 из действующих зелёных прогонов дома (С128).
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      actions:
+        patterns:
+          - "*"

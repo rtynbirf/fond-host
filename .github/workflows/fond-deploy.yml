@@ -1,0 +1,108 @@
+# ФОНД-ХОСТ НА АВТОМАТЕ (2026-11-16, Н-10 · ADR-0007): CORS-хост минус-фонда дома.
+# Источник: rtynbirf/singulyar ветка minus-fond (593 МБ: чистый-минус 63 mp3,
+# сборник 7 mp3 + ПАСПОРТ, prosto-lubi). Выкладка Pages отдаёт
+# access-control-allow-origin: * (мировая практика: Pages шлёт ACAO:* для публичных
+# сайтов — community discussions #157852, #22399) — лестница WebAudio плееров дома
+# жива кросс-доменно. Загрузка серверная (runner) — CORS в загрузке не участвует.
+# Приёмка: проба 206 + ACAO на живом файле (шаг «Приёмка прод»).
+# Запуск — только workflow_dispatch (запуск — СОБЫТИЕ, никогда — расписание).
+name: ФОНД-ХОСТ: minus-fond → Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: fond-host-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Материализация фонда из ветки minus-fond singulyar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Клон фонда (публичное тело — анонимно, токенов нет: I6)
+        run: |
+          git clone --depth 1 --filter=blob:none --branch minus-fond \
+            https://github.com/rtynbirf/singulyar.git /tmp/fond-src
+          echo "SNG_SHA=$(git -C /tmp/fond-src rev-parse --short HEAD)" >> "$GITHUB_ENV"
+
+      - name: Сборка выкладки (minus/** + .nojekyll + печать SHA256SUMS + честный индекс)
+        run: |
+          mkdir -p _site
+          cp -a /tmp/fond-src/minus _site/minus
+          touch _site/.nojekyll
+          cd _site
+          find minus -type f -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS.txt
+          python3 - <<'PY'
+          import os
+          n = sum(len(fs) for _, _, fs in os.walk('minus'))
+          mb = sum(os.path.getsize(os.path.join(r, f)) for r, _, fs in os.walk('minus') for f in fs) / 1e6
+          sha = os.environ.get('SNG_SHA', '?')
+          html = (f'<!DOCTYPE html><html lang="ru"><meta charset="utf-8">'
+                  f'<title>ФОНД-ХОСТ · CORS-хост дома</title>'
+                  f'<body style="background:#101218;color:#C0C8D0;'
+                  f'font:14px/1.6 ui-monospace,monospace;padding:24px;max-width:760px">'
+                  f'<h1 style="color:#E8C89C">◇ ФОНД-ХОСТ</h1>'
+                  f'<p>CORS-хост минус-фонда дома (Н-10 · ADR-0007). '
+                  f'Путь в выкладке: <code>minus/**</code>.</p><ul>'
+                  f'<li>файлов: {n}</li><li>вес: {mb:.1f} МБ</li>'
+                  f'<li>источник: singulyar @ minus-fond ({sha})</li>'
+                  f'<li>печать: <a style="color:#E8C89C" href="SHA256SUMS.txt">SHA256SUMS.txt</a></li></ul>'
+                  f'<p>Pages отдаёт access-control-allow-origin: * — '
+                  f'лестница WebAudio плееров дома жива кросс-доменно.</p></body></html>')
+          open('index.html', 'w', encoding='utf-8').write(html)
+          print(f'выкладка: {n} файлов, {mb:.1f} МБ, источник minus-fond@{sha}')
+          PY
+
+      - name: Приёмка выкладки локально (печать обязана сойтись)
+        run: |
+          cd _site
+          ВСЕГО=$(find minus -type f | wc -l)
+          ОК=$(sha256sum -c SHA256SUMS.txt | grep -c ': OK$' || true)
+          echo "печать: $ОК/$ВСЕГО"
+          [ "$ОК" = "$ВСЕГО" ] || { echo '##[error]печать разошлась'; exit 1; }
+
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6 (пин из действующих зелёных прогонов дома)
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5 (пин из Двери-0)
+        with:
+          path: '_site'
+
+  deploy:
+    name: Деплой фонда на прод
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5 (пин из Двери-0)
+
+  priemka:
+    name: Приёмка прод: ACAO + 206 (проба ×32)
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Проба заголовков и Range на живом файле фонда
+        run: |
+          BASE="https://rtynbirf.github.io/fond-host"
+          P=$(python3 -c "from urllib.parse import quote; print(quote('minus/сборник/сборник-01.mp3'))")
+          for i in 1 2 3 4 5; do
+            ACAO=$(curl -sI "$BASE/$P" -H "Origin: $BASE" | tr -d '\r' | grep -i '^access-control-allow-origin' || true)
+            CODE=$(curl -s -o /dev/null -w '%{http_code}' -r 0-99 "$BASE/$P" || true)
+            if [ -n "$ACAO" ] && [ "$CODE" = "206" ]; then
+              echo "приёмка ПРОЙДЕНА: $ACAO | Range=$CODE"
+              exit 0
+            fi
+            echo "попытка $i: ACAO='${ACAO:-нет}' Range=$CODE — Pages созревает, ждём 30 с"
+            sleep 30
+          done
+          echo '##[error]приёмка не пройдена: ACAO или 206 не пришли'
+          exit 1
