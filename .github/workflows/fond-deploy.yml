@@ -6,7 +6,7 @@
 # жива кросс-доменно. Загрузка серверная (runner) — CORS в загрузке не участвует.
 # Приёмка: проба 206 + ACAO на живом файле (шаг «Приёмка прод»).
 # Запуск — только workflow_dispatch (запуск — СОБЫТИЕ, никогда — расписание).
-name: ФОНД-ХОСТ: minus-fond → Pages
+name: "ФОНД-ХОСТ · minus-fond → Pages (CORS-хост дома)"
 
 on:
   workflow_dispatch:
@@ -25,7 +25,7 @@ jobs:
     name: Материализация фонда из ветки minus-fond singulyar
     runs-on: ubuntu-latest
     steps:
-      - name: Клон фонда (публичное тело — анонимно, токенов нет: I6)
+      - name: "Клон фонда (публичное тело — анонимно, токенов нет — I6)"
         run: |
           git clone --depth 1 --filter=blob:none --branch minus-fond \
             https://github.com/rtynbirf/singulyar.git /tmp/fond-src
@@ -86,7 +86,7 @@ jobs:
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5 (пин из Двери-0)
 
   priemka:
-    name: Приёмка прод: ACAO + 206 (проба ×32)
+    name: "Приёмка прод · ACAO + 206 (проба ×32)"
     needs: deploy
     runs-on: ubuntu-latest
     steps:
