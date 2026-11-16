@@ -1,0 +1,7 @@
+{
+  "name": "fond-host",
+  "language": "Python",
+  "description": "CORS-хост минус-фонда дома",
+  "shard_version": "1.0",
+  "created_by": "Z.ai fix 2026-11-16"
+}
