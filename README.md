@@ -1,10 +1,10 @@
 <div align="center">
-  <img src="banner.png" width="100%" alt="РЕВО-паспорт fond-host" />
+  <img src="https://cdn.jsdelivr.net/gh/rtynbirf/fond-host@main/banner.png" width="100%" alt="РЕВО-паспорт fond-host" />
 </div>
 
 <!--ФОРЖ:МУЗА:НАЧАЛО-->
 <div align="center">
-  <img src="forge-divider.svg" width="62%" alt="делитель мастерской НОВАЯ МАСТЕРСКАЯ" />
+  <img src="https://cdn.jsdelivr.net/gh/rtynbirf/fond-host@main/forge-divider.svg" width="62%" alt="делитель мастерской НОВАЯ МАСТЕРСКАЯ" />
 </div>
 <!--ФОРЖ:МУЗА:КОНЕЦ-->
 
