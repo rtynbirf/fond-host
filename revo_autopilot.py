@@ -10,7 +10,7 @@
 import hashlib, json, os, re, subprocess
 
 try:
-    CFG = json.loads(r'''{"name": "fond-host", "num": 118, "school": "МИФО-РЕАЛИЗМ", "desc": "CORS-хост минус-фонда дома (Н-10 · ADR-0007): Pages отдаёт ACAO:* для лестницы WebAudio плееров", "topics": ["cors", "fond-host", "minus-fund", "pages", "static-host"], "releases": 0, "palette": {"bg": "#171512", "bg2": "#232017", "ink": "#F2E9D4", "gold": "#D4AF37", "gold2": "#E8C868", "dim": "#A99E82", "accent": "#B03A2A"}}''')
+    CFG = json.loads(r'''{"name": "fond-host", "num": 21, "school": "НОВОСТРОЙ РОЯ", "desc": "CORS-хост минус-фонда дома (Н-10 · ADR-0007): Pages отдаёт ACAO:* для лестницы WebAudio плееров", "topics": ["cors", "fond-host", "minus-fund", "pages"], "releases": 0, "palette": {"bg": "#2A1D12", "bg2": "#3A2A1B", "ink": "#F1E8D8", "gold": "#D4AF37", "gold2": "#E8C868", "dim": "#B79F7E", "accent": "#1F5B8B"}}''')
 except Exception:
     CFG = {"name": "REVO", "num": 0, "school": "", "desc": "", "topics": [], "releases": 0,
            "palette": dict(bg="#EFE6CF", bg2="#F6EFDC", ink="#241C10", gold="#9A7B23",

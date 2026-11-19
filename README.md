@@ -1,4 +1,10 @@
 <div align="center">
+
+<a href="https://github.com/rtynbirf/fond-host"><img src="banner.png" width="100%" alt="fond-host — штандарт мастерской в каноне ORNAMENTAL MYTHO-REALISM"></a>
+
+</div>
+
+<div align="center">
   <img src="https://cdn.jsdelivr.net/gh/rtynbirf/fond-host@main/banner.png" width="100%" alt="РЕВО-паспорт fond-host" />
 </div>
 
@@ -15,7 +21,7 @@
 
 | ФАЙЛОВ | ПАПОК | КОММИТОВ | ОБНОВЛЕНО | РЕЛИЗОВ |
 |---:|---:|---:|---|---:|
-| 23 | 3 | 57 | 2026-11-19 | 0 |
+| 23 | 3 | 58 | 2026-11-19 | 0 |
 <!--ФОРЖ:ПАСПОРТ:КОНЕЦ-->
 
 # fond-host — CORS-хост минус-фонда дома
