@@ -4,13 +4,11 @@
 
 </div>
 
-<div align="center">
-  <img src="https://cdn.jsdelivr.net/gh/rtynbirf/fond-host@main/banner.png" width="100%" alt="РЕВО-паспорт fond-host" />
-</div>
-
 <!--ФОРЖ:МУЗА:НАЧАЛО-->
 <div align="center">
-  <img src="https://cdn.jsdelivr.net/gh/rtynbirf/fond-host@main/forge-divider.svg" width="62%" alt="делитель мастерской НОВАЯ МАСТЕРСКАЯ" />
+  <img src="https://cdn.jsdelivr.net/gh/rtynbirf/fond-host@main/repo-muse.svg" width="100%" alt="Муза fond-host: мастерская КУЗНЯ ПОЛИМАТ, кузня ПОЛИМАТ, раунд 12 · REVE=РЕВО" />
+  <br/>
+  <img src="https://cdn.jsdelivr.net/gh/rtynbirf/fond-host@main/forge-divider.svg" width="62%" alt="делитель мастерской КУЗНЯ ПОЛИМАТ" />
 </div>
 <!--ФОРЖ:МУЗА:КОНЕЦ-->
 
@@ -21,8 +19,26 @@
 
 | ФАЙЛОВ | ПАПОК | КОММИТОВ | ОБНОВЛЕНО | РЕЛИЗОВ |
 |---:|---:|---:|---|---:|
-| 33 | 4 | 110 | 2026-11-28 | 0 |
+| 33 | 4 | 1 | 2026-11-28 | 0 |
 <!--ФОРЖ:ПАСПОРТ:КОНЕЦ-->
+
+# fond-host
+
+<p align="center"><img src="https://cdn.jsdelivr.net/gh/rtynbirf/fond-host@main/.github/social-preview.png" alt="fond-host" width="100%"></p>
+
+<div align="center">
+
+<a href="https://github.com/rtynbirf/fond-host"><img src="banner.png" width="100%" alt="fond-host — штандарт мастерской в каноне ORNAMENTAL MYTHO-REALISM"></a>
+
+</div>
+
+<div align="center">
+  <img src="https://cdn.jsdelivr.net/gh/rtynbirf/fond-host@main/banner.png" width="100%" alt="РЕВО-паспорт fond-host" />
+</div>
+
+
+
+
 
 # fond-host — CORS-хост минус-фонда дома
 
@@ -41,3 +57,5 @@ prosto-lubi) с заголовком `access-control-allow-origin: *`, чтоб�
 - **Запуск**: только `workflow_dispatch` (запуск — СОБЫТИЕ, никогда — расписание).
 
 База: `rtynbirf/repo-doctrine` + аккаунт-уровневые правила `rtynbirf/khozyain`.
+
+<!--ФОРЖ:ПОДВАЛ-->
