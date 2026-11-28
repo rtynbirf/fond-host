@@ -19,8 +19,20 @@
 
 | ФАЙЛОВ | ПАПОК | КОММИТОВ | ОБНОВЛЕНО | РЕЛИЗОВ |
 |---:|---:|---:|---|---:|
-| 34 | 4 | 112 | 2026-11-28 | 0 |
+| 34 | 4 | 1 | 2026-11-28 | 0 |
 <!--ФОРЖ:ПАСПОРТ:КОНЕЦ-->
+
+# fond-host
+
+<div align="center">
+
+<a href="https://github.com/rtynbirf/fond-host"><img src="banner.png" width="100%" alt="fond-host — штандарт мастерской в каноне ORNAMENTAL MYTHO-REALISM"></a>
+
+</div>
+
+
+
+
 
 # fond-host
 
